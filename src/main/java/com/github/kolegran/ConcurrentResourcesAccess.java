@@ -30,6 +30,7 @@ public class ConcurrentResourcesAccess {
         System.out.println(Files.readString(Paths.get(FILE)));
     }
 
+    // Currently both threads write to file in parallel, which leads to some characters being overwritten
     private static void writeToFile(String content, File file) {
         char[] chars = content.toCharArray();
         try (final FileOutputStream out = new FileOutputStream(file)) {
