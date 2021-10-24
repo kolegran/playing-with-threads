@@ -30,7 +30,6 @@ public class ConcurrentResourcesAccess {
 
         name.join();
         hello.join();
-        // problem is with this implementation there is no guarantee of order in which lines will be written to the file
 
         System.out.println(Files.readString(Paths.get(FILE)));
     }
