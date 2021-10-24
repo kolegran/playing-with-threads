@@ -36,7 +36,7 @@ public class ConcurrentResourcesAccess {
     private static synchronized void writeToFile(String content, File file) {
         System.out.println(Thread.currentThread().getName());
 
-        char[] chars = readFileAndAppendNewContent(content).toCharArray();
+        final char[] chars = readFileAndAppendNewContent(content).toCharArray();
         try (final FileOutputStream out = new FileOutputStream(file)) {
             for (char c : chars) {
                 out.write(c);
