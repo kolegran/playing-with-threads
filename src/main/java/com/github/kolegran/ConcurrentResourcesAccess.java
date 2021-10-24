@@ -16,10 +16,17 @@ public class ConcurrentResourcesAccess {
         final Thread hello = new Thread(() -> writeToFile(helloString), "hello");
 
         final String nameString = "My name is Kolegran.\n";
-        final Thread name = new Thread(() -> writeToFile(nameString), "name");
+        final Thread name = new Thread(() -> {
+            try {
+                hello.join();
+            } catch (InterruptedException exception) {
+                exception.printStackTrace();
+            }
+            writeToFile(nameString);
+        }, "name");
 
-        hello.start();
         name.start();
+        hello.start();
 
         name.join();
         hello.join();
